@@ -138,7 +138,7 @@ FC-protein-changes "OutputFileName" "min_frequence"
 
 <!--- ............................................................. --->
 ### FC-network-trace-bonds
-This command draw the network from the (Input File), at the curent frame.
+This command draw the network from the _Input File_, at the curent frame.
 It take 4 parameters :
 
 | |Parameter|Meaning|
@@ -336,7 +336,7 @@ It take 6 drawing parameters :
 |3|start     |frame to begin reading.|
 |4|stop      |frame to stop reading at.|
 |5|stride    |stride for reading in trajectory frames. Stride is applied to all trajectory files loaded (the first and the others).|
-|6|first/all |"first" applies (start_value stop_value stride_value) to the first trajectory file loaded, and (1 last stride_value) to the others. <br> "all" applies (start_value stop_value stride_value) to the all trajectory files loaded.|
+|6|first/all |"first" applies _start_value stop_value stride_value_ to the first trajectory file loaded, and (1 last stride_value) to the others. <br> "all" applies _start_value stop_value stride_value_ to the all trajectory files loaded.|
 
 #### Usage
 FC-clustering "FolderName" "mask" "start" "stop" "stride" "first/all"
@@ -348,7 +348,7 @@ FC-clustering "FolderName" "mask" "start" "stop" "stride" "first/all"
 
 <!--- ............................................................. --->
 ### FC-neighbors
-This command give the frequence of residues in (selection_1) within (CutOff) of (selection_2).
+This command give the frequence of residues in _selection_1_ within _CutOff_ of _selection_2_.
 #### Usage
 FC-neighbors "OutFileName" "selection_1" "selection_2" "CutOff"
 #### Outfiles
@@ -358,7 +358,7 @@ FC-neighbors "OutFileName" "selection_1" "selection_2" "CutOff"
 
 <!--- ............................................................. --->
 ### FC-renumber
-This command renumber the IDs of the residues of the (selection), starting from the (startIDnumber).
+This command renumber the IDs of the residues of the _selection_, starting from the _startIDnumber_.
 #### Usage
 FC-renumber "selection" "startIDnumber"
 #### Warnings
@@ -368,7 +368,7 @@ FC-renumber "selection" "startIDnumber"
 <!--- ............................................................. --->
 ### FC-reconstruct :::
 This command uses a wrap/unwrap protocol to cleanly remove large jumps in atom coordinates of the selection (and the errors this causes in the bonds), and put the selection in the center of the cell.
-You can chose the parallelepiped or orthorhombic option to << wrap the atoms into the unitcell parallelepiped or the corresponding orthorhombic box with the same volume and center as the (non-orthrhombic) unitcell. >>
+You can chose the parallelepiped or orthorhombic option to << wrap the atoms into the unitcell parallelepiped or the corresponding orthorhombic box with the same volume and center as the _non-orthrhombic_ unitcell. >>
 #### Usage
 FC-reconstruct "selection" "parallelepiped | orthorhombic"
 #### Warnings
