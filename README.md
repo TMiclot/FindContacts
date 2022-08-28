@@ -119,7 +119,7 @@ FC-receptor-ligand "OutputFileName" "receptor" "ligand" "min_frequence"
 <!--- ............................................................. --->
 ### FC-protein-changes
 This command compute interaction search and analysis of H-Bonds, Salt bridges and Hydrophobic interactions of protein changes along the simulation. At the end you will get files to draw the interaction-type network, and others corresponding to interaction-type statistics for the _min_frequence_. 
-The _min_frequence_ parameter select residue pairs with a frequence >= _min_frequence_. The value must be between 0 and 1, and can take three decimal places.
+The _min_frequence_ parameter select residue pairs with a frequence >= _min_frequence_. The value must be between 0 and 1, and take three decimals.
 #### Usage
 FC-protein-changes "OutputFileName" "min_frequence"
 #### Outfiles
@@ -145,7 +145,7 @@ It take 4 parameters :
 |-|---------|-------|
 |1| InputFileName |Name of the file to be read. (Ex: xxx-HBonds-TableStat-Strong.dat)|
 |2| expansion     |Used to grow, or reduce, radius of network cylinder.|
-|3| MinRadius     |Select minimum radius you want to display.|
+|3| MinRadius     |Select minimum radius you want to display. It take three decimals.|
 |4| color         |Color of the networ cylinder. All VMD color name are are available. (red , green , blue ,...).|
 
 #### Usage
@@ -164,7 +164,7 @@ It take 5 parameters :
 |-|---------|-------|
 |1|InputFileName |Name of the file to be read. (Ex: xxx-HBonds-TableStat-Strong.dat)|
 |2|expansion     |Used to grow, or reduce, radius of network cylinder.|
-|3|MinRadius     |Select minimum radius you want to display.|
+|3|MinRadius     |Select minimum radius you want to display. Ittake three decimals.|
 |4|color         |Color of the networ cylinder. All VMD color name are are available. (red , green , blue ,...).|
 |5|1/2           |Write 1 or 2. In the InputFile residues are written in _resid in column 1_ and _resid in column 2_ format.|
 
