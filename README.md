@@ -366,7 +366,7 @@ FC-renumber "selection" "startIDnumber"
 
 
 <!--- ............................................................. --->
-### FC-reconstruct :::
+### FC-reconstruct
 This command uses a wrap/unwrap protocol to cleanly remove large jumps in atom coordinates of the selection (and the errors this causes in the bonds), and put the selection in the center of the cell.
 You can chose the parallelepiped or orthorhombic option to << wrap the atoms into the unitcell parallelepiped or the corresponding orthorhombic box with the same volume and center as the _non-orthrhombic_ unitcell. >>
 #### Usage
