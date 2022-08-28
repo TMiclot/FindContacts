@@ -14,6 +14,7 @@ FindContacts is a Tcl script that adds functionalities to the [VMD software](htt
 * Calculate a contact map betwen tow selections (based on distance).
 * Calculate the RMSD-2D map.
 * Many other things :smile:
+<!--- --->
 
 
 <!---  --->
@@ -22,6 +23,7 @@ FindContacts is a Tcl script that adds functionalities to the [VMD software](htt
 2. Open VMD TkConsole and source the script. You can do this easily by writing _source_ then _script name_: **source findcontacts.tcl**
 
 Please consider that FindContacts work only on Linux or MacOS, not Windows.
+<!--- --->
 
 
 <!---  --->
@@ -39,6 +41,7 @@ Please consider that FindContacts work only on Linux or MacOS, not Windows.
 ### Known bugs
 * Sometimes the script causes the VMD window to be unresponsive. Just wait for the script to finish working.
 * Sometimes an error message written in red appears in the TkConsole. It is only that VMD bugs due to too much memory usage. To solve this problem, you just have to restart VMD and start the analysis from where it was.
+<!--- --->
 
 
 <!--- --->
@@ -68,8 +71,7 @@ Please consider that FindContacts work only on Linux or MacOS, not Windows.
 |FC-renumber                 |Renumer resid of a selection from a given number.|
 |FC-reconstruct              |Center the selection and remove atom coordinate jumps.|
 
-<!--- --->
-## New selection variables added
+### New selection variables added
 |Variable|Equivalent VMD command|
 |--------|----------------------|
 |protein_SB_Pos |((resname HIS HSD HSE HSP HIE HIP HID) and (name ND1 NE2)) or ((resname LYS) and (name NZ)) or ((resname ARG) and (name NH1 NH2))|
@@ -79,35 +81,28 @@ Please consider that FindContacts work only on Linux or MacOS, not Windows.
 |nucleic_SB  |(name OP1 OP2)|
 
 To know all the selection variables used natively by VMD, go to its [documentation](https://www.ks.uiuc.edu/Research/vmd/current/ug/node90.html).
+<!--- --->
 
 
-
-======================================================================
-::: FC-receptor-ligand :::
-
+<!--- --->
+## Using the commands
+### FC-receptor-ligand
 This command compute interaction search and analysis of H-Bonds, Salt bridges and Hydrophobic interactions between Receptor and Ligand, along the simulation. At the end you will get files to draw the interaction-type network, and others corresponding to interaction-type statistics for the min_frequence. 
 The min_frequence parameter select residue pairs with a frequence >= min_frequence. The value must be between 0 and 1, and can take three decimal places.
-
-USAGE
+#### Usage
 FC-receptor-ligand "OutputFileName" "receptor" "ligand" "min_frequence"
-
-OUTFILE
-   * The outfiles will be OutputFileName-HBonds-Network-Frequences.dat , OutputFileName-HBonds-TableStats.dat , OutputFileName-Hydrophobic-Network-Frequences.dat , OutputFileName-Hydrophobic-TableStats.dat , OutputFileName-SaltBridges-Network-Frequences.dat , OutputFileName-SaltBridges-TableStats.dat .
-   * Type Network is use to draw network bonds and residues, but also to get interactions similitudes between multiple simulations.
-     Type TableStats is a table with statistical analysis of interactions.
-   * All outfiles are column based files.
-   * In the TableStats files, interaction are selected by the frequence (>= minimum frequency) and by the mean of the atomic distance (<= 4 angstroms).
-
-
-WARNINGS
-   * It may happen that the statistical table files are empty.
-     This means that the frequency of interactions are all lower than the minimum frequency chosen, or the mean of distance is > 4 angstroms.
-     In this case you should reduce the value of the minimum frequency.
-   * For protein-X interaction search, please always use "receptor" for your (protein/peptide/amono acids) selection.
-   * protein-protein : H-Bonds, Salt bridges and Hydrophobic available.
-     protein-nucleic : H-Bonds and Salt bridges available.
-     nucleic-nucleic : only H-Bonds available.
-     for others      : only H-Bonds available.
+#### Outfiles
+* The outfiles will be OutputFileName-HBonds-Network-Frequences.dat , OutputFileName-HBonds-TableStats.dat , OutputFileName-Hydrophobic-Network-Frequences.dat , OutputFileName-Hydrophobic-TableStats.dat , OutputFileName-SaltBridges-Network-Frequences.dat , OutputFileName-SaltBridges-TableStats.dat .
+* Type Network is use to draw network bonds and residues, but also to get interactions similitudes between multiple simulations. Type TableStats is a table with statistical analysis of interactions.
+* All outfiles are column based files.
+* In the TableStats files, interaction are selected by the frequence (>= minimum frequency) and by the mean of the atomic distance (<= 4 angstroms).
+#### Warnings
+* It may happen that the statistical table files are empty. This means that the frequency of interactions are all lower than the minimum frequency chosen, or the mean of distance is > 4 angstroms. In this case you should reduce the value of the minimum frequency.
+* For protein-X interaction search, please always use "receptor" for your (protein/peptide/amono acids) selection.
+* protein-protein : H-Bonds, Salt bridges and Hydrophobic available. <br>
+  protein-nucleic : H-Bonds and Salt bridges available. <br>
+  nucleic-nucleic : only H-Bonds available. <br>
+  for others      : only H-Bonds available. <br>
 
 
 
