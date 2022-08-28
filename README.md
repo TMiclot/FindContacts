@@ -1,9 +1,10 @@
 # FindContacts
 
-
 <!---  --->
 ## Description
 FindContacts is a Tcl script that adds functionalities to the [VMD software](https://www.ks.uiuc.edu/Research/vmd/). It especially allows to analyze and visualize interactions in a single molecule or in a complex. Several functionalities have been added, including the creation and visualization of interactions network, neighborings residues search, 2D-RMSD map, etc. But the script also integrates improvements to existing features in VMD.
+
+<img src="network.png" width="30%" height="30%">
 
 
 <!---  --->
