@@ -33,34 +33,6 @@
 
 
 
-#=====================================================================
-#=====================================================================
-puts "
-███████╗██╗███╗   ██╗██████╗        ██████╗ ██████╗ ███╗   ██╗████████╗ █████╗  ██████╗████████╗███████╗
-██╔════╝██║████╗  ██║██╔══██╗      ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔══██╗██╔════╝╚══██╔══╝██╔════╝
-█████╗  ██║██╔██╗ ██║██║  ██║█████╗██║     ██║   ██║██╔██╗ ██║   ██║   ███████║██║        ██║   ███████╗
-██╔══╝  ██║██║╚██╗██║██║  ██║╚════╝██║     ██║   ██║██║╚██╗██║   ██║   ██╔══██║██║        ██║   ╚════██║
-██║     ██║██║ ╚████║██████╔╝      ╚██████╗╚██████╔╝██║ ╚████║   ██║   ██║  ██║╚██████╗   ██║   ███████║
-╚═╝     ╚═╝╚═╝  ╚═══╝╚═════╝        ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝   ╚═╝   ╚══════╝
-
-v2.3 \t by Tom MICLOT                                                             
-"
-puts "\t Info) Find-Contacts is loading ..."
-#=====================================================================
-#=====================================================================
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #=====================================================================
@@ -79,10 +51,10 @@ proc ::Set_Global_Variables {} {
     #
     #--------------------------------------------------------------------- default variables used in the script
     #
-    set __PROTEIN_SALT_BRIDGE_POSITIVES__ "((resname HIS HSD HSE HSP HIE HIP HID) and (name ND1 NE2)) or ((resname LYS) and (name NZ)) or ((resname ARG) and (name NH1 NH2))"
-    set __PROTEIN_SALT_BRIDGE_NEGATIVES__ "((resname ASP) and (name OD1 OD2)) or ((resname GLU) and (name OE1 OE2))"
-    set __PROTEIN_SALT_BRIDGE_ALL__ "((resname HIS HSD HSE HSP HIE HIP HID) and (name ND1 NE2)) or ((resname LYS) and (name NZ)) or ((resname ARG) and (name NH1 NH2)) or ((resname ASP) and (name OD1 OD2)) or ((resname GLU) and (name OE1 OE2))"
-    set __PROTEIN_HYDROPHOBIC__ "hydrophobic and not backbone and (type C C1 C2 CA CB CC CE CI CK CQ CR CT CW)"
+    set __PROTEIN_SALT_BRIDGE_POSITIVES__ "((resname HIS HSD HSE HSP HIE HIP HID and name ND1 NE2) or (resname LYS and name NZ) or (resname ARG and name NH1 NH2))"
+    set __PROTEIN_SALT_BRIDGE_NEGATIVES__ "((resname ASP and name OD1 OD2) or (resname GLU and name OE1 OE2))"
+    set __PROTEIN_SALT_BRIDGE_ALL__ "((resname HIS HSD HSE HSP HIE HIP HID and name ND1 NE2) or (resname LYS and name NZ) or (resname ARG and name NH1 NH2) or (resname ASP and name OD1 OD2) or (resname GLU and name OE1 OE2))"
+    set __PROTEIN_HYDROPHOBIC__ "(hydrophobic and not backbone and type C C1 C2 CA CB CC CE CI CK CQ CR CT CW)"
     set __NUCLEIC_SALT_BRIDGE__ "(name OP1 OP2)" 
     #
     #--------------------------------------------------------------------- default variables used in the script -- converted for easy user usage
@@ -317,6 +289,10 @@ proc ::make-table {__OUTPUT_FILE_NAME__ __LIST_PAIR_ATOMS_ALLDYNAMIC__ __MIN_FRE
         set __MIN__ [format "%.4f" [lindex [lsort -real $__DISTANCES__] 0]] 
         set __MAX__ [format "%.4f" [lindex [lsort -real $__DISTANCES__] end]]
         #
+        #
+        # write information only if __ATOM_1_RESID__ not equal to __ATOM_2_RESID__  
+        if {$__ATOM_1_RESID__ != $__ATOM_2_RESID__} {
+        #
         # write information in outputfile_1
         puts $__OUTPUT_FILE_1__ "$__ATOM_1_RESNAME__:$__ATOM_1_RESID__:$__ATOM_1_NAME__:$__ATOM_1__ $__ATOM_2_RESNAME__:$__ATOM_2_RESID__:$__ATOM_2_NAME__:$__ATOM_2__ $__MEAN__ $__STDEV__ $__MIN__ $__MAX__ $__COUNT__ $__FREQUENCE__"
         #
@@ -324,7 +300,9 @@ proc ::make-table {__OUTPUT_FILE_NAME__ __LIST_PAIR_ATOMS_ALLDYNAMIC__ __MIN_FRE
         if {$__FREQUENCE__ >= $__MIN_FREQ__ && $__MEAN__ <= 4.0} {
             puts $__OUTPUT_FILE_2__ "$__ATOM_1_RESNAME__:$__ATOM_1_RESID__:$__ATOM_1_NAME__:$__ATOM_1__ $__ATOM_2_RESNAME__:$__ATOM_2_RESID__:$__ATOM_2_NAME__:$__ATOM_2__ $__MEAN__ $__STDEV__ $__MIN__ $__MAX__ $__COUNT__ $__FREQUENCE__"
 	}
-	#end if
+	#end if ; if of the frequence
+        }
+        #end if ; if for resid
         #
         foreach variables [ info vars ] { if {[string first "atomselect" $variables] != -1} {unset $variables} }
     }
@@ -517,7 +495,7 @@ proc FC-receptor-ligand {__OUTPUT_FILE__ __RECEPTOR__ __LIGAND__ __MIN_FREQ__} {
         # hydrophobic analysis only if receptor and ligand are both protein type
         if { [expr {"$__RECEPTOR_LIGAND_TYPE_CODE__" eq "1010"}] } {
             puts "\t\tHydrophobic search"
-            lassign [measure contacts 3.9 [atomselect top "( $__RECEPTOR__ or $__LIGAND__ ) and $__PROTEIN_HYDROPHOBIC__" frame $__FRAME__]] __HYDROPHOBIC_LIST_ATOMS_1__ __HYDROPHOBIC_LIST_ATOMS_2__
+            lassign [measure contacts 3.9 [atomselect top "$__RECEPTOR__ and $__PROTEIN_HYDROPHOBIC__" frame $__FRAME__] [atomselect top "$__LIGAND__ and $__PROTEIN_HYDROPHOBIC__" frame $__FRAME__]] __HYDROPHOBIC_LIST_ATOMS_1__ __HYDROPHOBIC_LIST_ATOMS_2__
             #
             set __HYDROPHOBICS_LIST_PAIR_ATOMS_FRAME__ [::get-list-atoms $__HYDROPHOBIC_LIST_ATOMS_1__ $__HYDROPHOBIC_LIST_ATOMS_2__]
             set __HYDROPHOBICS_LIST_PAIR_ATOMS_ALLFRAME__ [concat $__HYDROPHOBICS_LIST_PAIR_ATOMS_ALLFRAME__ $__HYDROPHOBICS_LIST_PAIR_ATOMS_FRAME__]
@@ -1703,6 +1681,7 @@ proc FC-reconstruct {__SEL__ __BOXTYPE__} {
 #end proc
 #=====================================================================
 #=====================================================================
+
 
 
 
