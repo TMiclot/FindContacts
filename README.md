@@ -76,10 +76,10 @@ Please consider that FindContacts work only on Linux or MacOS, not Windows.
 ### New selection variables added
 |Variable|Equivalent VMD command|
 |--------|----------------------|
-|protein_SB_Pos |((resname HIS HSD HSE HSP HIE HIP HID) and (name ND1 NE2)) or ((resname LYS) and (name NZ)) or ((resname ARG) and (name NH1 NH2))|
-|protein_SB_Neg |((resname ASP) and (name OD1 OD2)) or ((resname GLU) and (name OE1 OE2))|
-|protein_SB_All |((resname HIS HSD HSE HSP HIE HIP HID) and (name ND1 NE2)) or ((resname LYS) and (name NZ)) or ((resname ARG) and (name NH1 NH2)) or ((resname ASP) and (name OD1 OD2)) or ((resname GLU) and (name OE1 OE2))|
-|protein_Hyd |hydrophobic and not backbone and (type C C1 C2 CA CB CC CE CI CK CQ CR CT CW)|
+|protein_SB_Pos |((resname HIS HSD HSE HSP HIE HIP HID and name ND1 NE2) or (resname LYS and name NZ) or (resname ARG and name NH1 NH2))|
+|protein_SB_Neg |((resname ASP and name OD1 OD2) or (resname GLU and name OE1 OE2))|
+|protein_SB_All |((resname HIS HSD HSE HSP HIE HIP HID and name ND1 NE2) or (resname LYS and name NZ) or (resname ARG and name NH1 NH2) or (resname ASP and name OD1 OD2) or (resname GLU and name OE1 OE2))|
+|protein_Hyd |(hydrophobic and not backbone and type C C1 C2 CA CB CC CE CI CK CQ CR CT CW)|
 |nucleic_SB  |(name OP1 OP2)|
 
 To know all the selection variables used natively by VMD, go to its [documentation](https://www.ks.uiuc.edu/Research/vmd/current/ug/node90.html).
